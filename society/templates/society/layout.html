@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'society/styles.css' %}">
+    <script src="{% static 'society/control.js' %}"></script>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+</head>
+<body>
+    
+
+    <!-- NAVBAR STARTS HERE -->
+    <!-- Navbar-->
+<header class="header">
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div class="container"><a href="{% url 'society:index' %}" class="navbar-brand text-uppercase font-weight-bold">SIGMA</a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+            
+            <div id="navbarSupportedContent" class="collapse navbar-collapse d-flex justify-content-between">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="{% url 'society:index' %}" class="nav-link text-uppercase font-weight-bold">Home </a></li>
+                    <li class="nav-item"><a href="{% url 'crescendo:index' %}" class="nav-link text-uppercase font-weight-bold">Crescendo</a></li>
+                    <li class="nav-item"><a href="{% url 'crew5678:index' %}" class="nav-link text-uppercase font-weight-bold">Crew 5678</a></li>
+                    <li class="nav-item"><a href="{% url 'nautanki:index' %}" class="nav-link text-uppercase font-weight-bold">Nautanki</a></li>
+                    <li class="nav-item"><a href="{% url 'photography:index' %}" class="nav-link text-uppercase font-weight-bold">Photography</a></li>
+                    <li class="nav-item"><a href="{% url 'tlc:index' %}" class="nav-link text-uppercase font-weight-bold">TLC</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a  href="{% url 'society:logout' %}" class="nav-link text-uppercase font-weight-bold d-flex justify-content-end">Log Out {{ user.username }}</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'society:login' %}" class="nav-link text-uppercase font-weight-bold d-flex justify-content-end">Log In</a></li>
+                    <li class="nav-item"><a href="{% url 'society:register' %}" class="nav-link text-uppercase font-weight-bold d-flex justify-content-end">Register</a></li>
+                    {% endif %}                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+    <!-- NAVBAR ENDS HERE -->
+    {% block body %}
+    {% endblock body %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</html>
