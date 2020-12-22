@@ -24,6 +24,6 @@ urlpatterns = [
     path('crew5678', include("crew5678.urls")),
     path('nautanki', include("nautanki.urls")),
     path('photography', include("photography.urls")),
-    path('tlc', include("tlc.urls"))
+    path('tlc', include("tlc.urls")),
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

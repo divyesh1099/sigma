@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 from django.conf import settings
 from django.contrib.auth import get_user_model as user_model
+from tinymce.models import HTMLField
 # Create your models here.
 class User(AbstractUser):
     pass

@@ -1,0 +1,18 @@
+{% extends "society/layout.html" %}
+{% block title %}
+New Article
+{% endblock title %}
+{% block body %}
+<form action="{% url 'tlc:newarticle' %}" method="POST">
+    <div class="container d-flex flex-column align-items-center">
+        <div class="jumbotron justify-content-center p-5">
+            <input type="text" class="bg-transparent display-3 font-weight-bold text-center rounded border-0 p-0" name="title" style="outline: none;" value="{{ post.title }}" placeholder="Title Here"></h1>
+        </div>
+        <textarea name="content" rows="20" placeholder="Pour your arts here ...">{{ post.content }}</textarea>
+        <div>
+            <input type="submit" class="btn btn-lg btn-danger m-2" value="POST NOW">
+        </div>
+    </div>  
+</form>
+
+{% endblock body %}

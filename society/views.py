@@ -15,7 +15,6 @@ def profile(request, userid):
         bio=request.POST["bio"]
         dob=request.POST["dob"]
         pic=request.FILES.get('pic', False)
-        
         try:
             profile=Profile(user=user, bio=bio, dob=dob, pic=pic)
             profile.save()
