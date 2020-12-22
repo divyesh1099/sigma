@@ -10,23 +10,23 @@
     <!-- NAVBAR STARTS HERE -->
     <!-- Navbar-->
     <header class="header">
-        <nav class="navbar navbar-expand-lg fixed-top py-3">
-            <div class="container"><a href="{% url 'society:index' %}" class="navbar-brand mb-3 text-uppercase font-weight-bold">SIGMA</a>
+        <nav class="navbar navbar-expand-lg fixed-top py-0">
+            <div class="container"><a href="{% url 'society:index' %}" class="navbar-brand mb-1 text-uppercase font-weight-bold">SIGMA</a>
                 <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>            
                 <div id="navbarSupportedContent" class="collapse navbar-collapse d-flex justify-content-between">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mb-3 active"><a href="{% url 'society:index' %}" class="nav-link text-uppercase font-weight-bold">Home </a></li>
-                        <li class="nav-item mb-3"><a href="{% url 'crescendo:index' %}" class="nav-link text-uppercase font-weight-bold">Crescendo</a></li>
-                        <li class="nav-item mb-3"><a href="{% url 'crew5678:index' %}" class="nav-link text-uppercase font-weight-bold">Crew 5678</a></li>
-                        <li class="nav-item mb-3"><a href="{% url 'nautanki:index' %}" class="nav-link text-uppercase font-weight-bold">Nautanki</a></li>
-                        <li class="nav-item mb-3"><a href="{% url 'photography:index' %}" class="nav-link text-uppercase font-weight-bold">Photography</a></li>
-                        <li class="nav-item mb-3"><a href="{% url 'tlc:index' %}" class="nav-link text-uppercase font-weight-bold">TLC</a></li>
+                        <li class="nav-item mb-1 active"><a href="{% url 'society:index' %}" class="nav-link text-uppercase font-weight-bold">Home </a></li>
+                        <li class="nav-item mb-1"><a href="{% url 'crescendo:index' %}" class="nav-link text-uppercase font-weight-bold">Crescendo</a></li>
+                        <li class="nav-item mb-1"><a href="{% url 'crew5678:index' %}" class="nav-link text-uppercase font-weight-bold">Crew 5678</a></li>
+                        <li class="nav-item mb-1"><a href="{% url 'nautanki:index' %}" class="nav-link text-uppercase font-weight-bold">Nautanki</a></li>
+                        <li class="nav-item mb-1"><a href="{% url 'photography:index' %}" class="nav-link text-uppercase font-weight-bold">Photography</a></li>
+                        <li class="nav-item mb-1"><a href="{% url 'tlc:index' %}" class="nav-link text-uppercase font-weight-bold">TLC</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         {% if user.is_authenticated %}
                         <li class="btn-group">
-                            <button type="button" class="nav-link btn mb-3 bg-transparent font-weight-bold text-uppercase">{{ user.username }}</button>
-                            <button type="button" class="btn btn-sm mb-3 bg-transparent dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="nav-link btn mb-1 bg-transparent font-weight-bold text-uppercase"><img alt="Image placeholder" src="{{ user.userofprofile.pic.url }}" style="height:26px; width:26px; border-radius:13px;"> {{ user.username }}</button>
+                            <button type="button" class="btn btn-sm mb-1 bg-transparent dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu">

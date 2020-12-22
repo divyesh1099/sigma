@@ -7,8 +7,7 @@ class User(AbstractUser):
     pass
 
 class Profile(models.Model):
-    # user = user_model()
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user=models.OneToOneField(User, on_delete=models.CASCADE, related_name="userofprofile")
     bio=models.TextField(max_length=500, help_text="Describe Yourself in 500 words or less", blank=True)
     dob=models.DateField(help_text="Date of Birth", blank=True)
     pic=models.ImageField(upload_to='images', blank=True)
