@@ -82,7 +82,7 @@ main {
     padding-top: 40px;
     padding-bottom: 40px;
 }
-.nav-link, .navbar-brand{
+.nav-link, .navbar-brand, .myMargin {
     color: white;
     -webkit-text-stroke-width: 0.3px;
     -webkit-text-stroke-color: black;

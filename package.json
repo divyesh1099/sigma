@@ -1,0 +1,24 @@
+{
+  "name": "sigma",
+  "version": "1.0.0",
+  "description": "Website For College Cultural Society.",
+  "main": "manage.py",
+  "dependencies": {
+    "bootstrap": "^3.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python manage.py runserver"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divyesh1099/sigma.git"
+  },
+  "author": "Divyesh Nandlala Vishwakarma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/divyesh1099/sigma/issues"
+  },
+  "homepage": "https://github.com/divyesh1099/sigma#readme"
+}

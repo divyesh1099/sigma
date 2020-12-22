@@ -8,6 +8,34 @@ from .models import *
 def index(request):
     return render(request, "society/index.html")
 
+def profile(request, userid):
+    user=User.objects.get(pk=userid)
+    if request.method == "POST":
+        user=user
+        bio=request.POST["bio"]
+        dob=request.POST["dob"]
+        pic=request.FILES.get('pic', False)
+        
+        try:
+            profile=Profile(user=user, bio=bio, dob=dob, pic=pic)
+            profile.save()
+        except IntegrityError:
+            return render(request, "society/profile.html", {
+                "message": "THERE'S AN INTEGRITY ERROR",
+                "user":user
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("society:index"))
+    else:
+        login(request, user)
+        profile=Profile.objects.get(pk=userid)
+        return render(request, "society/profile.html", {
+            "user":user,
+            "profile":profile
+        })
+
+    
+
 def login_view(request):
     if request.method == "POST":
 

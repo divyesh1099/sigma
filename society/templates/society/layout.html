@@ -4,50 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'society/styles.css' %}">
     <script src="{% static 'society/control.js' %}"></script>
+    <!-- NAVBAR STARTS HERE -->
+    <!-- Navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top py-3">
+            <div class="container"><a href="{% url 'society:index' %}" class="navbar-brand mb-3 text-uppercase font-weight-bold">SIGMA</a>
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>            
+                <div id="navbarSupportedContent" class="collapse navbar-collapse d-flex justify-content-between">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mb-3 active"><a href="{% url 'society:index' %}" class="nav-link text-uppercase font-weight-bold">Home </a></li>
+                        <li class="nav-item mb-3"><a href="{% url 'crescendo:index' %}" class="nav-link text-uppercase font-weight-bold">Crescendo</a></li>
+                        <li class="nav-item mb-3"><a href="{% url 'crew5678:index' %}" class="nav-link text-uppercase font-weight-bold">Crew 5678</a></li>
+                        <li class="nav-item mb-3"><a href="{% url 'nautanki:index' %}" class="nav-link text-uppercase font-weight-bold">Nautanki</a></li>
+                        <li class="nav-item mb-3"><a href="{% url 'photography:index' %}" class="nav-link text-uppercase font-weight-bold">Photography</a></li>
+                        <li class="nav-item mb-3"><a href="{% url 'tlc:index' %}" class="nav-link text-uppercase font-weight-bold">TLC</a></li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}
+                        <li class="btn-group">
+                            <button type="button" class="nav-link btn mb-3 bg-transparent font-weight-bold text-uppercase">{{ user.username }}</button>
+                            <button type="button" class="btn btn-sm mb-3 bg-transparent dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'society:profile' user.id %}">Profile</a>
+                                <a href="{% url 'society:logout' %}" class="dropdown-item">Log Out</a>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li class="nav-item"><a href="{% url 'society:login' %}" class="nav-link mb-3 text-uppercase font-weight-bold d-flex justify-content-end">Log In</a></li>
+                        <li class="nav-item"><a href="{% url 'society:register' %}" class="nav-link mb-3 text-uppercase font-weight-bold d-flex justify-content-end">Register</a></li>
+                        {% endif %}                    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- NAVBAR ENDS HERE -->
     <title>
         {% block title %}
         {% endblock title %}
     </title>
 </head>
 <body>
-    
-
-    <!-- NAVBAR STARTS HERE -->
-    <!-- Navbar-->
-<header class="header">
-    <nav class="navbar navbar-expand-lg fixed-top py-3">
-        <div class="container"><a href="{% url 'society:index' %}" class="navbar-brand text-uppercase font-weight-bold">SIGMA</a>
-            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-            
-            <div id="navbarSupportedContent" class="collapse navbar-collapse d-flex justify-content-between">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="{% url 'society:index' %}" class="nav-link text-uppercase font-weight-bold">Home </a></li>
-                    <li class="nav-item"><a href="{% url 'crescendo:index' %}" class="nav-link text-uppercase font-weight-bold">Crescendo</a></li>
-                    <li class="nav-item"><a href="{% url 'crew5678:index' %}" class="nav-link text-uppercase font-weight-bold">Crew 5678</a></li>
-                    <li class="nav-item"><a href="{% url 'nautanki:index' %}" class="nav-link text-uppercase font-weight-bold">Nautanki</a></li>
-                    <li class="nav-item"><a href="{% url 'photography:index' %}" class="nav-link text-uppercase font-weight-bold">Photography</a></li>
-                    <li class="nav-item"><a href="{% url 'tlc:index' %}" class="nav-link text-uppercase font-weight-bold">TLC</a></li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item"><a  href="{% url 'society:logout' %}" class="nav-link text-uppercase font-weight-bold d-flex justify-content-end">Log Out {{ user.username }}</a></li>
-                    {% else %}
-                    <li class="nav-item"><a href="{% url 'society:login' %}" class="nav-link text-uppercase font-weight-bold d-flex justify-content-end">Log In</a></li>
-                    <li class="nav-item"><a href="{% url 'society:register' %}" class="nav-link text-uppercase font-weight-bold d-flex justify-content-end">Register</a></li>
-                    {% endif %}                    
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-    <!-- NAVBAR ENDS HERE -->
     {% block body %}
     {% endblock body %}
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 </html>
