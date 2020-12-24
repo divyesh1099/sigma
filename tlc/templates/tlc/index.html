@@ -3,9 +3,18 @@
 TLC
 {% endblock title %}
 {% block body %}
+{% if message %}
+<div class="alert alert-success" role="alert">
+    {{ message }}
+  </div>
+{% endif %}
 <div class="jumbotron">
     <h1>THE LITERATURE CLUB</h1>
 </div>
-
-<a href="{% url 'tlc:newarticle' %}">New</a>
+<ul>
+  {% for post in posts %}
+  <li><a href="{% url 'tlc:editarticle' user.id post.title %}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+<a href="{% url 'tlc:newarticle' user.id %}">New</a>
 {% endblock body %}

@@ -26,12 +26,15 @@
                     <ul class="navbar-nav ml-auto">
                         {% if user.is_authenticated %}
                         <li class="btn-group">
-                            <button type="button" class="nav-link btn mb-1 bg-transparent font-weight-bold text-uppercase"><img alt="Image placeholder" src="{{ user.userofprofile.pic.url }}" style="height:26px; width:26px; border-radius:13px;"> {{ user.username }}</button>
+                            <button type="button" class="nav-link btn mb-1 bg-transparent font-weight-bold text-uppercase"><img alt="Update Profile Pic" class="mb-1" src="{{ user.userofprofile.pic.url }}" style="height:26px; width:26px; border-radius:13px;"> {{ user.username }}</button>
                             <button type="button" class="btn btn-sm mb-1 bg-transparent dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{% url 'society:profile' user.id %}">Profile</a>
+                                {% if user.is_superuser %}
+                                <a href="/admin" class="dropdown-item">Admin Panel</a>                                
+                                {% endif %}
                                 <a href="{% url 'society:logout' %}" class="dropdown-item">Log Out</a>
                             </div>
                         </li>

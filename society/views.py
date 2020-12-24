@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .models import *
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def index(request):
     return render(request, "society/index.html")
@@ -27,7 +28,10 @@ def profile(request, userid):
         return HttpResponseRedirect(reverse("society:index"))
     else:
         login(request, user)
-        profile=Profile.objects.get(pk=userid)
+        try:
+            profile=Profile.objects.get(pk=userid)
+        except ObjectDoesNotExist:
+            profile=""
         return render(request, "society/profile.html", {
             "user":user,
             "profile":profile
