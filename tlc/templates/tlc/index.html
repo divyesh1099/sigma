@@ -4,17 +4,66 @@ TLC
 {% endblock title %}
 {% block body %}
 {% if message %}
-<div class="alert alert-success" role="alert">
+<div class="alert alert-{{ type }} alert-dismissible text-center font-weight-bold" role="alert" data-dismiss="alert" aria-label="Close">
     {{ message }}
-  </div>
-{% endif %}
-<div class="jumbotron">
-    <h1>THE LITERATURE CLUB</h1>
 </div>
-<ul>
-  {% for post in posts %}
-  <li><a href="{% url 'tlc:editarticle' user.id post.title %}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
-<a href="{% url 'tlc:newarticle' user.id %}">New</a>
+{% endif %}
+
+<div class="card bg-dark text-white">
+  <img style="height: 300px;" src="https://images.unsplash.com/photo-1581388847562-d5a56eec1cfb?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8&auto=format&fit=crop&w=500&q=60" class="card-img" alt="Thumbnail Here">
+  <div class="card-img-overlay">
+    {% if user.is_authenticated %}
+    <h1 class="card-title display-1 font-weight-bold text-center">THE LITERATURE CLUB <a href="{% url 'tlc:newarticle' user.id %}"><i class="fas fa-pen-alt"></i></a></h1>
+    {% endif %}
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  <div class="col-xl-4 col-md-4 col-sm-6">
+    <h4 class="my-2">YOU MIGHT LIKE</h4>
+    {% for post in posts %}
+      <div class="card p-1 m-1">
+        <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="Thumbnail Not Loaded">
+        <div class="card-body">
+          <h4><a href="{% url 'tlc:article' post.title %}">{{ post.title }}</a></h4>
+          <p class="card-text">{{ post.content|striptags|truncatewords:100 }}...</p>
+        </div>
+        <div class="d-flex">
+          {% if user == post.user %}
+          <div class="p-1"><a class="btn btn-info btn-md" href="{% url 'tlc:editarticle' user.id post.title %}">Edit</a></div>
+          <div class="p-1"><a class="btn btn-danger btn-md" href="{% url 'tlc:deletearticle' user.id post.title %}">Delete</a></div>
+          {% endif %}
+          <div class="ml-auto p-1 text-muted">{{ post.user.username }}</div>
+        </div>
+      </div>    
+    {% endfor %}
+  </div>
+  <div class="col-xl-8 col-md-8 col-sm-6">
+    <h4 class="my-2">MOST POPULAR</h4>
+    {% for post in posts %}
+    <div class="card m-1 p-1">
+      <div class="row">
+        <div class="col-4">
+          <img src="{{ post.thumbnail.url }}" class="w-100 h-100" alt="">
+        </div>
+        <div class="col-8">
+          <div class="card-body">
+            <h4 class="card-title"><a href="{% url 'tlc:article' post.title %}">{{ post.title }}</a></h4>
+            <p class="card-text">{{ post.content|striptags|truncatewords:100 }}...</p>
+          </div>
+          <div class="d-flex">
+            {% if user == post.user %}
+            <div class="p-1"><a class="btn btn-info btn-sm" href="{% url 'tlc:editarticle' user.id post.title %}">Edit</a></div>
+            <div class="p-1"><a class="btn btn-danger btn-sm" href="{% url 'tlc:deletearticle' user.id post.title %}">Delete</a></div>
+            {% endif %}
+            <div class="ml-auto p-1 text-muted">{{ post.user.username }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+
 {% endblock body %}

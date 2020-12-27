@@ -17,15 +17,29 @@ def profile(request, userid):
         dob=request.POST["dob"]
         pic=request.FILES.get('pic', False)
         try:
-            profile=Profile(user=user, bio=bio, dob=dob, pic=pic)
-            profile.save()
-        except IntegrityError:
-            return render(request, "society/profile.html", {
-                "message": "THERE'S AN INTEGRITY ERROR",
-                "user":user
+            oldProfile=Profile.objects.get(pk=userid)
+            if bio:
+                oldProfile.bio=bio
+            else:
+                pass
+            if dob:
+                oldProfile.dob=dob
+            else:
+                pass
+            if pic:
+                oldProfile.pic=pic
+            else:
+                pass
+            oldProfile.save()
+            return HttpResponseRedirect(reverse("society:index"), {
+                "message":"Profile was updated successfully"
             })
-        login(request, user)
-        return HttpResponseRedirect(reverse("society:index"))
+        except ObjectDoesNotExist:
+            newProfile=Profile(user=user, bio=bio, dob=dob, pic=pic)
+            newProfile.save()
+            return HttpResponseRedirect(reverse("society:index"), {
+                "message":"Profile was created successfully"
+            })
     else:
         login(request, user)
         try:

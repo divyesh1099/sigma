@@ -8,11 +8,16 @@ Edit Article
     {{ message }} 
   </div>
 {% endif %}
-<form action="{% url 'tlc:editarticle' user.id post.title %}" method="POST">
+<form action="{% url 'tlc:editarticle' user.id post.title %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container d-flex flex-column align-items-center">
         <div class="jumbotron justify-content-center p-5">
             <input type="text" class="bg-transparent display-3 font-weight-bold text-center rounded border-0 p-0" name="title" style="outline: none;" value="{{ post.title|safe }}" placeholder="Title Here"></h1>
+        </div>
+        <div class="text-center my-1">
+            <img src="{{ post.thumbnail.url }}" class="avatar img-circle" alt="https://makitweb.com/demo/broken_image/images/noimage.png" style="height: 150px; width: 150px;">
+            <h6>Upload a thumbnail photo</h6>          
+            <input type="file" class="form-control" name="thumbnail">
         </div>
         <textarea name="content" rows="20" placeholder="Pour your arts here ...">{{ post.content|safe }}</textarea>
         <div>
